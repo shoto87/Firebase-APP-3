@@ -1,5 +1,7 @@
 import 'package:firebase_app_3/screens/home_screen.dart';
 import 'package:firebase_app_3/screens/signup_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -94,7 +96,9 @@ class _SignInScreenState extends State<SignInScreen> {
                 const Text("Don't have an account?"),
                 TextButton(
                   onPressed: () {
-                    // Navigate to the sign-up page
+                    FirebaseAuth.instance.createUserWithEmailAndPassword(
+                        email: _emailController.text,
+                        password: _passwordController.text);
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -104,8 +108,7 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                   child: const Text(
                     'Sign Up',
-                    style: TextStyle(
-                        color: Color(0xFF7ED957)), // Text color applied
+                    style: TextStyle(color: Color(0xFF7ED957)),
                   ),
                 ),
               ],
